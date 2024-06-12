@@ -17,8 +17,8 @@ metadata:
     backstage.io/kubernetes-id: ${{values.component_id | dump}}
     sonarqube.org/project-key: ${{values.component_id | dump}}
     grafana/tag-selector: "Kubernetes"
-    prometheus.io/rule: container_cpu_usage_seconds_total{namespace=${{values.component_id | dump}}}
-    prometheus.io/alert: all
+    prometheus.io/alert: ContainerHighCpuUtilization,ContainerHighMemoryUsage,ContainerVolumeUsage
+    prometheus.io/rule: sum by (pod) (container_memory_usage_bytes{namespace="${{values.component_id | dump}}"}), sum by (pod) (container_cpu_usage_seconds_total{namespace="${{values.component_id | dump}}"})
   tags:
     - golang
     # - ${{ values.system }}

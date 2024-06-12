@@ -16,13 +16,13 @@ pipelines:
 # This is a list of `images` that DevSpace can build for this project
 # We recommend to skip image building during development (devspace dev) as much as possible
 images:
-  ${{values.component_id}}:
+  app:
     image: ${IMAGE}
     dockerfile: ./Dockerfile
 
 # This is a list of `deployments` that DevSpace can create for this project
 deployments:
-  ${{values.component_id}}:
+  app:
     helm:
       chart:
         name: devxp-dev
@@ -40,7 +40,7 @@ deployments:
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
-  ${{values.component_id}}:
+  app:
     # Search for the container that runs this image
     imageSelector: ${IMAGE}
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
